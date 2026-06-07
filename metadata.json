@@ -1,0 +1,6 @@
+{
+  "name": "H.A.D. Asset Management",
+  "description": "A professional financial investment management platform with comprehensive user and administrative dashboards, tracking real-time crypto markets and company portfolio assets with 2X target and level rewards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

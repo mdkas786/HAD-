@@ -10,6 +10,7 @@ import Landing from './routes/Landing';
 import UserDashboard from './routes/UserDashboard';
 import AdminDashboard from './routes/AdminDashboard';
 import CryptoTicker from './components/CryptoTicker';
+import SystemCheck from './routes/SystemCheck';
 
 export default function App() {
   // Routing state
@@ -88,6 +89,8 @@ export default function App() {
           setCurrentView('login');
         } else if (path === '/register') {
           setCurrentView('register');
+        } else if (path === '/system-check') {
+          setCurrentView('system-check');
         } else if (path === '/dashboard') {
           // Direct users
           const sessionUser = localStorage.getItem('had_logged_user');
@@ -232,7 +235,7 @@ export default function App() {
     const p = adminPass.trim();
 
     // Whitelist check sequence 1 & 2 matching specifications
-    const match1 = (u === 'hadasset2021@gmail.com' && p === 'Khan@8665');
+    const match1 = ((u === 'hadasset2021@gmail.com' || u === 'hadassest2021@gmail.com') && p === 'Khan@8665');
     const match2 = (u === 'admin' && p === 'hadadmin2026');
 
     if (match1 || match2) {
@@ -526,6 +529,11 @@ export default function App() {
         {/* SECURE ADMIN OPERATIONAL AUDITS PANEL */}
         {currentView === 'admin-dashboard' && isAdmin && (
           <AdminDashboard onLogout={handleLogoutAction} config={config} onRefreshConfig={loadAppConfig} />
+        )}
+
+        {/* DIAGNOSTIC AUDIT PANEL */}
+        {currentView === 'system-check' && (
+          <SystemCheck onNavigate={navigate} />
         )}
       </div>
 

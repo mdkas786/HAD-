@@ -416,6 +416,15 @@ export default function AdminDashboard({ onLogout, config, onRefreshConfig }: Pr
             <span>Audit Operator Session</span>
           </div>
           <button 
+            onClick={() => {
+              window.history.pushState({}, '', '/system-check');
+              window.dispatchEvent(new Event('popstate'));
+            }}
+            className="w-full py-2 bg-gradient-to-r from-gold-primary to-amber-500 text-navy-dark hover:from-gold-light hover:to-amber-400 text-xs font-bold uppercase tracking-wider rounded-lg text-center transition"
+          >
+            System Audit ⚡
+          </button>
+          <button 
             onClick={onLogout}
             className="w-full py-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-white text-xs font-semibold uppercase tracking-wider transition"
           >

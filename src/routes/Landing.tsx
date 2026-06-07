@@ -347,6 +347,7 @@ export default function Landing({ onNavigate, config }: Props) {
             <button onClick={() => onNavigate('/login')} className="hover:text-gold-primary transition">Login</button>
             <button onClick={() => onNavigate('/register')} className="hover:text-gold-primary transition">Register</button>
             <button onClick={() => onNavigate('/admin/login')} className="hover:text-gold-primary transition">Staff Login</button>
+            <button onClick={() => onNavigate('/system-check')} className="text-gold-primary hover:underline transition font-mono">System Audit ⚡</button>
           </div>
 
           <p className="font-mono text-[10px]">

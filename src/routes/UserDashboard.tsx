@@ -241,6 +241,16 @@ export default function UserDashboard({ user: initialUser, onLogout, config }: P
 
           <div className="flex items-center gap-3">
             <NotificationsDropdown hadId={user.had_id} onRefreshTrigger={refreshAllData} />
+            <button 
+              onClick={() => {
+                window.history.pushState({}, '', '/system-check');
+                window.dispatchEvent(new Event('popstate'));
+              }}
+              className="px-2.5 py-1 text-[10px] font-mono border border-gold-primary/20 bg-gold-primary/5 hover:bg-gold-primary/10 text-gold-primary rounded-lg transition uppercase font-semibold"
+              title="System Connection Diagnostics"
+            >
+              Audit ⚡
+            </button>
             <span className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-xs font-mono font-bold text-gold-light tracking-wide uppercase">
               {user.had_id}
             </span>

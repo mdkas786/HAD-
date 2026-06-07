@@ -1,38 +1,19 @@
 import React, { useEffect, useState } from 'react';
-
-interface Coin {
-  id: string;
-  symbol: string;
-  name: string;
-  priceUsd: string;
-  changePercent24Hr: string;
-}
+import { subscribeCryptoPrices, CryptoTickerData } from '../services/binance';
 
 export default function CryptoTicker() {
-  const [coins, setCoins] = useState<Coin[]>([]);
+  const [coins, setCoins] = useState<CryptoTickerData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchPrices = async () => {
-    try {
-      const res = await fetch('https://api.coincap.io/v2/assets?limit=10');
-      const json = await res.json();
-      if (json && json.data) {
-        // Filter elements
-        const targets = ['bitcoin', 'ethereum', 'binance-coin', 'solana', 'ripple', 'cardano', 'dogecoin', 'polkadot', 'tron', 'avalanche-2'];
-        const list = json.data.filter((c: any) => targets.includes(c.id));
-        setCoins(list);
-      }
-    } catch (e) {
-      console.error('Ticker coin fetch failed:', e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchPrices();
-    const interval = setInterval(fetchPrices, 30000); // 30s update
-    return () => clearInterval(interval);
+    const unsubscribe = subscribeCryptoPrices((updatedPrices) => {
+      setCoins(updatedPrices);
+      setLoading(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   if (loading || coins.length === 0) {
